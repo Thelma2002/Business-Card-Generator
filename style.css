@@ -1,0 +1,282 @@
+/* ----------------------------
+   CSS RESET / NORMALIZATION
+---------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* ----------------------------
+   CSS ROOT VARIABLES
+---------------------------- */
+:root {
+    --clr-light: #f4f4f4;
+    --clr-dark: #020617;
+    --clr-slate: #1E293B;
+}
+
+/* ----------------------------
+   BODY STYLING
+---------------------------- */
+body {
+    background-color: var(--clr-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* ----------------------------
+   HEADING SECTION
+---------------------------- */
+#heading {
+    color: var(--clr-light);
+    font-size: 50px;
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* ----------------------------
+   CONTAINER LAYOUT
+---------------------------- */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 95vw;
+    background-color: var(--clr-slate);
+    border: 5px solid #40513B;
+    border-radius: 20px;
+    color: #40513B;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px black;
+    padding: 20px;
+    margin-bottom: 60px; /* space for footer */
+}
+
+/* Main layout: split into sections */
+.main-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Left column for uploader + form */
+.left-column {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+/* Right column for preview + templates */
+.card-preview {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+/* ----------------------------
+   LOGO UPLOADER SECTION
+---------------------------- */
+.upload-logo {
+    opacity: 0.75;
+    width: 100%;
+    height: 200px;
+    background: url('https://qph.cf2.quoracdn.net/main-qimg-f32f85d21d59a5540948c3bfbce52e68');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.file-uploader {
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.icon {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: #ccc;
+    -webkit-text-stroke: 2px #bbb;
+}
+
+.upload-logo:hover .icon {
+    opacity: 1;
+}
+
+/* ----------------------------
+   FORM STYLING
+---------------------------- */
+.form-content-container {
+    width: 100%;
+}
+
+.form-input {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #aaa;
+    font-size: 14px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.form-input:hover {
+    background-color: rgba(231, 239, 241, 0.94);
+}
+
+.Generate {
+    background: indigo;
+    color: white;
+    margin: 10px 0;
+    width: 90%;
+    max-width: 200px;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.Generate:hover {
+    background-color: plum;
+}
+
+/* ----------------------------
+   CARD PREVIEW STYLING
+---------------------------- */
+.business-card {
+    background: #6A0DAD;
+    color: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Templates section */
+.templates-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.template-options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.template-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #40513B;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.template-btn:hover {
+    background-color: #263A29;
+}
+
+/* Template Variants */
+.template1 {
+    background: #2C3E50;
+    color: #ECF0F1;
+    font-family: 'Times New Roman', serif;
+}
+
+.template2 {
+    background: linear-gradient(45deg, #FF5733, #C70039);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.template3 {
+    background: #F4F4F4;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    border: 2px solid #333;
+}
+
+/* ----------------------------
+   LOGO PREVIEW + DOWNLOAD
+---------------------------- */
+.logo-preview {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.logo-preview img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 4px;
+}
+
+.download-section {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#download-btn {
+    padding: 10px 20px;
+    background-color: #6A0DAD;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#download-btn:hover {
+    background-color: #4B0082;
+}
+
+/* ----------------------------
+   FOOTER STYLING
+---------------------------- */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #40513B;
+    color: var(--clr-light);
+    text-align: center;
+    padding: 10px;
+}

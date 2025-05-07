@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    
+    <!-- Page Title -->
+    <title>Business Card Generator</title>
+
+    <!-- Link to external CSS file for styling -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Font Awesome library for using icons (like the plus icon) -->
+    <script src="https://kit.fontawesome.com/f6be9ed352.js" crossorigin="anonymous"></script>
+
+    <!-- html2canvas library for taking a screenshot of the card for download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
+  
+  <body>
+    <!-- Main heading/title of the page -->
+    <h1 id="heading">Business Card Generator</h1>
+
+    <!-- Main container for the layout -->
+    <div class="container">
+      <div class="main-layout">
+      
+        <!-- LEFT COLUMN: Upload logo and fill form -->
+        <div class="left-column">
+          
+          <!-- Logo upload section -->
+          <div class="upload-logo">
+            <!-- Plus icon to indicate upload -->
+            <h1 class="icon">
+              <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+            </h1>
+            <!-- File input for uploading logo -->
+            <input
+              class="file-uploader"
+              id="logo-upload"
+              type="file"
+              accept="image/*"
+              onchange="upload()" 
+            >
+          </div>
+
+          <!-- Form to collect business card details -->
+          <div class="form-content-container">
+            <form>
+              <!-- Input fields for company, title, name, contact, email -->
+              <input type="text" class="form-input" placeholder="Company Name" id="input-company" />
+              <input type="text" class="form-input" placeholder="Title" id="input-title" />
+              <input type="text" class="form-input" placeholder="Your name" id="input-name" />
+              <input type="text" class="form-input" placeholder="Contact Number" id="input-contact" />
+              <input type="text" class="form-input" placeholder="Email" id="input-email" />
+
+              <!-- Generate button to create the business card preview -->
+             
+           <input type="button" class="Generate" value="Generate" onclick="generateCard()">
+            </form>
+          </div>
+        </div>
+
+        <!-- CENTER COLUMN: Business Card Preview Section -->
+        <div class="card-preview" >
+          
+          <!-- Actual preview card content -->
+          <div class="business-card template1">
+            <!-- Logo preview -->
+            <div class="logo-preview"></div>
+
+            <!-- Text fields that will be updated with user input -->
+            <h2 id="preview-name">Company Name</h2>
+            <p id="preview-title">Title</p>
+            <p id="preview-user-name">Your Name</p>
+            <p id="preview-contact">📞 Contact Number</p>
+            <p id="preview-email">✉️ Email</p>
+          </div>
+
+          <!-- Button to download the business card as an image -->
+          <div class="download-section">
+            <button id="download-btn">DOWNLOAD CARD</button>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Template chooser -->
+        <div class="templates-section">
+          <h2>Choose a Template</h2>
+
+          <!-- Buttons to switch between different card styles -->
+          <div class="template-options">
+            <button class="template-btn" data-template="template1">Classic</button>
+            <button class="template-btn" data-template="template2">Modern</button>
+            <button class="template-btn" data-template="template3">Minimalist</button>
+          </div>
+        </div>
+
+      </div> <!-- End of main-layout -->
+    </div> <!-- End of container -->
+
+    <!-- Footer -->
+    <footer>&copy; 2025 LT Zulu</footer>
+  </body>
+</html>
