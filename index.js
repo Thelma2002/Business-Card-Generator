@@ -35,37 +35,49 @@ function upload() {
         document.querySelector('.upload-logo').style.backgroundImage = `url('${uploadedImageUrl}')`;
 
         // Display image in business card preview
-        document.getElementById('logo-preview').style.backgroundImage = `url('${uploadedImageUrl}')`;
+        const avatar = document.querySelector('.card-avatar');
+        avatar.style.backgroundImage = `url('${uploadedImageUrl}')`;
+        avatar.style.backgroundSize = 'contain'; // Ensure image fits within container
+        avatar.style.backgroundRepeat = 'no-repeat';
+        avatar.style.backgroundPosition = 'center';
+        avatar.style.width = '80px';
+        avatar.style.height = '80px';
+        avatar.style.borderRadius = '10px'; // Optional rounded corners
     };
 }
 
 // Function to update the business card preview dynamically
 function generateCard() {
     // Get user input values from form fields
-    const companyName = document.getElementById('input-company').value;
-    const title = document.getElementById('input-title').value;
-    const userName = document.getElementById('input-name').value;
-    const contact = document.getElementById('input-contact').value;
-    const email = document.getElementById('input-email').value;
+    const firstName = document.getElementById('name').value;
+    const title = document.getElementById('title').value;
+    const site = document.getElementById('website').value;
+    const phoneNumber = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
 
-    // Update the business card preview section
-    document.getElementById('preview-name').textContent = companyName || 'Company Name';
-    document.getElementById('preview-title').textContent = title || 'Title';
-    document.getElementById('preview-user-name').textContent = userName || 'Your Name';
-    document.getElementById('preview-contact').textContent = contact ? `📞 ${contact}` : '📞 Contact Number';
-    document.getElementById('preview-email').textContent = email ? `✉️ ${email}` : '✉️ Email';
+    // Update the business card preview section with correct IDs
+    document.getElementById('preview-name').textContent = firstName || 'PLAYER NAME';
+    document.getElementById('preview-title').textContent = title || 'Game Developer';
+    document.getElementById('preview-phone').textContent = phoneNumber || 'Phone Number';
+    document.getElementById('preview-email').textContent = email ? ` ${email}` : ' Email';
+    document.getElementById('preview-website').textContent = site ? ` ${site}` : ' Website';
 }
 
-// Function to allow users to download the business card as an image
-document.getElementById('download-btn').addEventListener('click', function () {
-    const card = document.getElementById('business-card');
+// Ensure preview updates dynamically as the user types
+document.querySelector('.download-button').addEventListener('click', function () {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF();
 
-    // Capture business card using html2canvas
-    html2canvas(card).then(canvas => {
-        // Create a download link
-        const downloadLink = document.createElement('a');
-        downloadLink.download = 'business_card.png'; // File name
-        downloadLink.href = canvas.toDataURL(); // Convert to image URL
-        downloadLink.click(); // Trigger download
+    // Capture business card as an image
+    html2canvas(document.querySelector('.preview-card'), { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        
+        // Add image to PDF with positioning
+        pdf.addImage(imgData, 'PNG', 15, 40, 180, 80); 
+
+        // Save the generated PDF
+        pdf.save('business_card.pdf');
     });
 });
+
+
