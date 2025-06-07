@@ -4,7 +4,7 @@ A fun and pixel-perfect **Retro Business Card Generator** built with HTML, CSS, 
 
 ## 🌐 Live Preview
 
-**Try it now:** [Retro Business Card Generator](https://replit.com/@your-username/retro-business-card-generator)
+**Try it now:** [Retro Business Card Generator](https://business-card-generator-lt.netlify.app/)
 
 ## 🚀 Features
 
