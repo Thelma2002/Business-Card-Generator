@@ -1,3 +1,4 @@
+
 // Function to handle the image upload and display it
 function upload() {
     // Select the file input element
@@ -33,16 +34,17 @@ function upload() {
 
         // Display image in upload section
         document.querySelector('.upload-logo').style.backgroundImage = `url('${uploadedImageUrl}')`;
+        document.querySelector('.upload-logo').style.backgroundSize = 'cover';
+        document.querySelector('.upload-logo').style.backgroundPosition = 'center';
+        document.querySelector('.upload-logo').style.backgroundRepeat = 'no-repeat';
 
         // Display image in business card preview
         const avatar = document.querySelector('.card-avatar');
         avatar.style.backgroundImage = `url('${uploadedImageUrl}')`;
-        avatar.style.backgroundSize = 'contain'; // Ensure image fits within container
+        avatar.style.backgroundSize = 'cover';
         avatar.style.backgroundRepeat = 'no-repeat';
         avatar.style.backgroundPosition = 'center';
-        avatar.style.width = '80px';
-        avatar.style.height = '80px';
-        avatar.style.borderRadius = '10px'; // Optional rounded corners
+        avatar.style.backgroundSize = 'contain';
     };
 }
 
@@ -58,26 +60,58 @@ function generateCard() {
     // Update the business card preview section with correct IDs
     document.getElementById('preview-name').textContent = firstName || 'PLAYER NAME';
     document.getElementById('preview-title').textContent = title || 'Game Developer';
-    document.getElementById('preview-phone').textContent = phoneNumber || 'Phone Number';
-    document.getElementById('preview-email').textContent = email ? ` ${email}` : ' Email';
-    document.getElementById('preview-website').textContent = site ? ` ${site}` : ' Website';
+    document.getElementById('preview-phone').textContent = phoneNumber || '(+27) 123 4567 91';
+    document.getElementById('preview-email').textContent = email || 'your.email@domain.com';
+    document.getElementById('preview-website').textContent = site || 'https://yourwebsite.com';
 }
 
-// Ensure preview updates dynamically as the user types
-document.querySelector('.download-button').addEventListener('click', function () {
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF();
-
-    // Capture business card as an image
-    html2canvas(document.querySelector('.preview-card'), { scale: 2 }).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        
-        // Add image to PDF with positioning
-        pdf.addImage(imgData, 'PNG', 15, 40, 180, 80); 
-
-        // Save the generated PDF
-        pdf.save('business_card.pdf');
+// Add event listeners for real-time updates
+document.addEventListener('DOMContentLoaded', function() {
+    // Add input event listeners to all form fields
+    const formInputs = ['name', 'title', 'website', 'phone', 'email'];
+    
+    formInputs.forEach(inputId => {
+        const input = document.getElementById(inputId);
+        if (input) {
+            input.addEventListener('input', generateCard);
+        }
     });
+
+    // Download button functionality
+    document.querySelector('.download-button').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent form submission
+        
+        const previewCard = document.querySelector('.preview-card');
+        
+        // Use html2canvas to capture the preview card
+        html2canvas(previewCard, { 
+            scale: 2,
+            backgroundColor: '#1a0033',
+            useCORS: true
+        }).then(canvas => {
+            // Create download link for PNG
+            const link = document.createElement('a');
+            link.download = 'retro-business-card.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            
+            // Also create PDF version
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({
+                orientation: 'landscape',
+                unit: 'mm',
+                format: [85.6, 53.98] // Standard business card size
+            });
+            
+            const imgData = canvas.toDataURL('image/png');
+            pdf.addImage(imgData, 'PNG', 0, 0, 85.6, 53.98);
+            pdf.save('retro-business-card.pdf');
+        }).catch(error => {
+            console.error('Error generating card:', error);
+            alert('Error generating card. Please try again.');
+        });
+    });
+    
+    // Initial call to populate preview with default values
+    generateCard();
 });
-
-

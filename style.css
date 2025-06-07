@@ -377,7 +377,7 @@ body::after {
 /*preview of the image*/
 .card-avatar {
     position: absolute;
-    top: 60px;
+    top: 80px;
     right: 60px;
     width: 100px; /* Slightly reduced for better balance */
     height: 100px;
@@ -388,7 +388,7 @@ body::after {
     justify-content: center;
     font-size: 24px;
     color: #000; /* Black text/emoji */
-    border-radius: 50%;
+    border-radius: 10px;
     overflow: hidden; /* Prevent image overflow */
     background-size: cover; /* Ensures image fully covers without distortion */
     background-position: center; /* Centers the image */
